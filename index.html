@@ -6,32 +6,39 @@
 <title>Animated Weather Table</title>
 <style>
   body {
-    margin: 24px;
-    background: linear-gradient(180deg, #fbfbfb 0%, #ffffff 100%);
+    margin: 0;
+    background: url('assets/background.png') no-repeat center center/cover;
     color: #223;
     font-family: sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .wrap {
     max-width: 980px;
+    width: 95%;
     margin: 0 auto;
   }
 
   h1 {
     text-align: center;
     margin-bottom: 10px;
-     background: linear-gradient(180deg, #e782e7 0%, #55b6b9 100%);
-     box-shadow: 0 0 20px rgba(1, 47, 233, 0.459);
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
   }
 
   .card {
-    background: white;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     padding: 16px;
+    backdrop-filter: blur(10px);
   }
 
   table {
@@ -39,73 +46,44 @@
     border-collapse: separate;
     border-spacing: 8px;
     table-layout: fixed;
+    color: white;
   }
 
   thead th {
     text-align: left;
     font-size: 14px;
     padding: 12px 14px;
-    background: linear-gradient(180deg, #e782e7 0%, #55b6b9 100%);
-    border: 1px solid #ddd;
+    background: rgba(231, 130, 231, 0.8);
     border-radius: 8px;
-    transition: all 0.3s ease;
   }
 
-  /* Hover on header cells */
   thead th:hover {
     transform: scale(1.07);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 14px rgba(255,255,255,0.4);
     cursor: pointer;
   }
 
   tbody td {
     padding: 12px 14px;
     border-radius: 8px;
-    position: relative;
     text-align: center;
     transition: all 0.3s ease;
-
+    background: rgba(255,255,255,0.15);
+    color: #fff;
   }
 
- 
   tbody td:hover {
-    transform: scale(1.10);
-    box-shadow: 0 8px 16px rgba(240, 5, 5, 0.2);
-    cursor: pointer;
-    
-  }
-
-  /* Entire row hover effect */
-  tbody tr:hover td {
-    box-shadow: 0 0 20px rgba(1, 47, 233, 0.459);
-    transform: scale(1.05);
-    transition: all 0.3s ease;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
   }
 
   tbody td.day {
-    text-align: left;
     font-weight: 600;
-    background: linear-gradient(180deg, #709ef3, #cf9090);
-  }
-
-  tbody td:nth-child(2) {
-    background: linear-gradient(180deg, #ffe8c0, #ffb56b);
-  }
-  tbody td:nth-child(3) {
-    background: linear-gradient(180deg, #b8d8ff, #6ea8ff);
-  }
-  tbody td:nth-child(4) {
-    background: linear-gradient(180deg, #ffe9b8, #ffcf70);
-  }
-  tbody td:nth-child(5) {
-    background: linear-gradient(180deg, #d9d2ff, #b0a5ff);
-  }
-  tbody td:nth-child(6) {
-    background: linear-gradient(180deg, #ffd8e8, #ffb0c8);
+    background: rgba(112, 158, 243, 0.6);
   }
 
   .btn {
-    background: #8e6ebe;
+    background: rgba(142, 110, 190, 0.8);
     border-radius: 8px;
     padding: 8px 12px;
     border: none;
@@ -116,18 +94,13 @@
   }
 
   .btn:hover {
-    background: #a178e6;
+    background: rgba(161, 120, 230, 1);
     transform: scale(1.1);
   }
 
   .weather-ico {
     display: inline-block;
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-    font-size: 24px;
-    border-radius: 8px;
-    position: relative;
+    font-size: 28px;
   }
 
   .sun {
@@ -136,41 +109,23 @@
   }
   @keyframes shine {
     0%,100% { filter: brightness(1); transform: rotate(0deg) scale(1); }
-    50% { filter: brightness(1.5); transform: rotate(15deg) scale(1.2); }
+    50% { filter: brightness(1.4); transform: rotate(15deg) scale(1.2); }
   }
 
-  .rainy {
-    position: relative;
-    display: inline-block;
-  }
   .rainy::before {
     content: "☁️";
     font-size: 28px;
-    position: absolute;
-    top: -4px;
-    left: 0;
+    position: relative;
   }
   .rainy::after {
-    content: "💧💧💧";
-    position: absolute;
-    left: 0;
-    top: 20px;
+    content: "💧💧";
+    display: block;
     font-size: 14px;
     animation: rain 1s linear infinite;
   }
   @keyframes rain {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(10px); opacity: 0; }
-  }
-
-  /* Entry fade */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  tbody td {
-    animation: fadeIn 0.6s ease forwards;
   }
 </style>
 </head>
@@ -196,7 +151,7 @@
             <td><span class="weather-ico sun">☀️</span></td>
             <td></td>
             <td></td>
-            <td class="percent">20%</td>
+            <td>20%</td>
             <td><button class="btn">Your Report</button></td>
           </tr>
           <tr>
@@ -204,7 +159,7 @@
             <td></td>
             <td><span class="weather-ico rainy"></span></td>
             <td></td>
-            <td class="percent">10%</td>
+            <td>10%</td>
             <td></td>
           </tr>
           <tr>
@@ -212,7 +167,7 @@
             <td><span class="weather-ico sun">☀️</span></td>
             <td></td>
             <td></td>
-            <td class="percent">5%</td>
+            <td>5%</td>
             <td></td>
           </tr>
           <tr>
@@ -220,7 +175,7 @@
             <td></td>
             <td></td>
             <td><span class="weather-ico">🌩️</span></td>
-            <td class="percent">30%</td>
+            <td>30%</td>
             <td></td>
           </tr>
           <tr>
@@ -228,7 +183,7 @@
             <td></td>
             <td><span class="weather-ico rainy"></span></td>
             <td></td>
-            <td class="percent">40%</td>
+            <td>40%</td>
             <td></td>
           </tr>
           <tr>
@@ -236,7 +191,7 @@
             <td></td>
             <td></td>
             <td><span class="weather-ico">🌫️</span></td>
-            <td class="percent">33%</td>
+            <td>33%</td>
             <td></td>
           </tr>
           <tr>
@@ -244,7 +199,7 @@
             <td><span class="weather-ico sun">☀️</span></td>
             <td></td>
             <td></td>
-            <td class="percent">22%</td>
+            <td>22%</td>
             <td></td>
           </tr>
         </tbody>
